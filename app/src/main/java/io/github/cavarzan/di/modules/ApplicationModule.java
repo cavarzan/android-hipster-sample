@@ -24,6 +24,8 @@ import io.github.cavarzan.domain.usecases.first.FirstUseCaseImpl;
 import io.github.cavarzan.domain.usecases.second.SecondUseCase;
 import io.github.cavarzan.domain.usecases.second.SecondUseCaseImpl;
 import io.github.cavarzan.domain.repository.another.*;
+import io.github.cavarzan.domain.usecases.another.AnotherUseCase;
+import io.github.cavarzan.domain.usecases.another.AnotherUseCaseImpl;
 // android-hipster-needle-module-provides-import
 
 @Module
@@ -89,6 +91,11 @@ public class ApplicationModule {
     @Singleton
     AnotherRepository provideAnotherRepository(Retrofit retrofit) {
        return new AnotherRepositoryImpl(new AnotherRemoteRepository(retrofit), new AnotherLocalRepository());
+    }
+    @Provides
+    @Singleton
+    AnotherUseCase provideAnotherUseCase(ThreadExecutor executor) {
+       return new AnotherUseCaseImpl(executor);
     }
     // android-hipster-needle-module-provides-method
 
