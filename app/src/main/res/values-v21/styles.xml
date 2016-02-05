@@ -5,5 +5,5 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
   <style name="AppTheme" parent="AppTheme.Base"/>
-  <style name="SampleStyle" parent="AppTheme"/>
+  <style name="SampleStyle" parent="AppTheme"></style>
 </resources>

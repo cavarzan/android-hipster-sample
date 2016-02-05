@@ -1,11 +1,11 @@
-package io.github.cavarzan.domain.interactors.second;
+package io.github.cavarzan.domain.interactors.first;
 
 import io.github.cavarzan.domain.executors.ThreadExecutor;
 import io.github.cavarzan.domain.interactors.base.BaseInteractor;
 
-public class SecondInteractorImpl extends BaseInteractor implements SecondInteractor {
+public class FirstInteractorImpl extends BaseInteractor implements FirstInteractor {
 
-    public SecondInteractorImpl(ThreadExecutor executor) {
+    public FirstInteractorImpl(ThreadExecutor executor) {
         super(executor);
     }
 

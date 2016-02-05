@@ -1,24 +1,31 @@
 package io.github.cavarzan.di.components;
 
+import javax.inject.Singleton;
+
+import dagger.Component;
+import io.github.cavarzan.application.App;
+import io.github.cavarzan.util.gson.GsonModule;
+import io.github.cavarzan.environment.EnvironmentModule;
+import io.github.cavarzan.di.ForApplication;
+import io.github.cavarzan.di.components.DaggerApplicationComponent;
+import io.github.cavarzan.di.modules.AndroidModule;
+import io.github.cavarzan.di.modules.ApplicationModule;
+import io.github.cavarzan.environment.EnvironmentConfiguration;
+import io.github.cavarzan.util.gson.GsonModule;
+
 import android.content.Context;
 
+import io.github.cavarzan.domain.executors.ThreadExecutor;
+import io.github.cavarzan.storage.Storage;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import io.github.cavarzan.application.App;
-import io.github.cavarzan.di.ForApplication;
-import io.github.cavarzan.di.components.DaggerApplicationComponent;
-import io.github.cavarzan.di.modules.AndroidModule;
-import io.github.cavarzan.di.modules.ApplicationModule;
-import io.github.cavarzan.domain.executors.ThreadExecutor;
-import io.github.cavarzan.environment.EnvironmentModule;
-import io.github.cavarzan.services.push.PushIntentService;
-import io.github.cavarzan.services.push.PushServiceListener;
-import io.github.cavarzan.storage.Storage;
-import io.github.cavarzan.util.gson.GsonModule;
 import retrofit2.Retrofit;
+import io.github.cavarzan.services.push.PushServiceListener;
+import io.github.cavarzan.services.push.PushIntentService;
+import io.github.cavarzan.domain.repository.first.FirstRepository;
 // android-hipster-needle-component-injection-import
 
 @Singleton
@@ -40,6 +47,7 @@ public interface ApplicationComponent {
 
     void inject(PushServiceListener pushServiceListener);
     void inject(PushIntentService pushIntentService);
+    FirstRepository provideFirstRepository();
     // android-hipster-needle-component-injection-method
 
     final class Initializer {

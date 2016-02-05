@@ -4,27 +4,24 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import javax.inject.Singleton;
 import com.google.gson.Gson;
 
-import javax.inject.Singleton;
-
+import de.greenrobot.event.EventBus;
 import dagger.Module;
 import dagger.Provides;
-import de.greenrobot.event.EventBus;
+import retrofit2.Retrofit;
 import io.github.cavarzan.application.App;
 import io.github.cavarzan.di.ForApplication;
+import io.github.cavarzan.storage.Storage;
 import io.github.cavarzan.domain.executors.JobExecutor;
 import io.github.cavarzan.domain.executors.ThreadExecutor;
-import io.github.cavarzan.domain.interactors.second.SecondInteractor;
-import io.github.cavarzan.domain.interactors.second.SecondInteractorImpl;
-import io.github.cavarzan.domain.repository.another.AnotherLocalRepository;
-import io.github.cavarzan.domain.repository.another.AnotherRemoteRepository;
-import io.github.cavarzan.domain.repository.another.AnotherRepository;
-import io.github.cavarzan.domain.repository.another.AnotherRepositoryImpl;
+
+import io.github.cavarzan.domain.interactors.first.FirstInteractor;
+import io.github.cavarzan.domain.interactors.first.FirstInteractorImpl;
 import io.github.cavarzan.domain.usecases.first.FirstUseCase;
 import io.github.cavarzan.domain.usecases.first.FirstUseCaseImpl;
-import io.github.cavarzan.storage.Storage;
-import retrofit2.Retrofit;
+import io.github.cavarzan.domain.repository.first.*;
 // android-hipster-needle-module-provides-import
 
 @Module
@@ -73,8 +70,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SecondInteractor provideSecondInteractor(ThreadExecutor executor) {
-       return new SecondInteractorImpl(executor);
+    FirstInteractor provideFirstInteractor(ThreadExecutor executor) {
+       return new FirstInteractorImpl(executor);
     }
     @Provides
     @Singleton
@@ -83,8 +80,8 @@ public class ApplicationModule {
     }
     @Provides
     @Singleton
-    AnotherRepository provideAnotherRepository(Retrofit retrofit) {
-       return new AnotherRepositoryImpl(new AnotherRemoteRepository(retrofit), new AnotherLocalRepository());
+    FirstRepository provideFirstRepository(Retrofit retrofit) {
+       return new FirstRepositoryImpl(new FirstRemoteRepository(retrofit), new FirstLocalRepository());
     }
     // android-hipster-needle-module-provides-method
 
