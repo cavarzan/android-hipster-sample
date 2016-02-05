@@ -4,28 +4,27 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import javax.inject.Singleton;
 import com.google.gson.Gson;
 
-import de.greenrobot.event.EventBus;
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
+import de.greenrobot.event.EventBus;
 import io.github.cavarzan.application.App;
 import io.github.cavarzan.di.ForApplication;
-import io.github.cavarzan.storage.Storage;
 import io.github.cavarzan.domain.executors.JobExecutor;
 import io.github.cavarzan.domain.executors.ThreadExecutor;
-
 import io.github.cavarzan.domain.interactors.second.SecondInteractor;
 import io.github.cavarzan.domain.interactors.second.SecondInteractorImpl;
+import io.github.cavarzan.domain.repository.another.AnotherLocalRepository;
+import io.github.cavarzan.domain.repository.another.AnotherRemoteRepository;
+import io.github.cavarzan.domain.repository.another.AnotherRepository;
+import io.github.cavarzan.domain.repository.another.AnotherRepositoryImpl;
 import io.github.cavarzan.domain.usecases.first.FirstUseCase;
 import io.github.cavarzan.domain.usecases.first.FirstUseCaseImpl;
-import io.github.cavarzan.domain.usecases.second.SecondUseCase;
-import io.github.cavarzan.domain.usecases.second.SecondUseCaseImpl;
-import io.github.cavarzan.domain.repository.another.*;
-import io.github.cavarzan.domain.usecases.another.AnotherUseCase;
-import io.github.cavarzan.domain.usecases.another.AnotherUseCaseImpl;
+import io.github.cavarzan.storage.Storage;
+import retrofit2.Retrofit;
 // android-hipster-needle-module-provides-import
 
 @Module
@@ -84,18 +83,8 @@ public class ApplicationModule {
     }
     @Provides
     @Singleton
-    SecondUseCase provideSecondUseCase(ThreadExecutor executor) {
-       return new SecondUseCaseImpl(executor);
-    }
-    @Provides
-    @Singleton
     AnotherRepository provideAnotherRepository(Retrofit retrofit) {
        return new AnotherRepositoryImpl(new AnotherRemoteRepository(retrofit), new AnotherLocalRepository());
-    }
-    @Provides
-    @Singleton
-    AnotherUseCase provideAnotherUseCase(ThreadExecutor executor) {
-       return new AnotherUseCaseImpl(executor);
     }
     // android-hipster-needle-module-provides-method
 
