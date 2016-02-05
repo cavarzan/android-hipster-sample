@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import io.github.cavarzan.application.App;
+import io.github.cavarzan.domain.interactors.first.FirstInteractor;
+import io.github.cavarzan.domain.usecases.first.FirstUseCase;
 import io.github.cavarzan.util.gson.GsonModule;
 import io.github.cavarzan.environment.EnvironmentModule;
 import io.github.cavarzan.di.ForApplication;
@@ -26,6 +28,8 @@ import retrofit2.Retrofit;
 import io.github.cavarzan.services.push.PushServiceListener;
 import io.github.cavarzan.services.push.PushIntentService;
 import io.github.cavarzan.domain.repository.first.FirstRepository;
+import io.github.cavarzan.domain.interactors.another.AnotherInteractor;
+import io.github.cavarzan.domain.usecases.another.AnotherUseCase;
 // android-hipster-needle-component-injection-import
 
 @Singleton
@@ -43,11 +47,16 @@ public interface ApplicationComponent {
 
     Gson provideGson();
 
+    FirstUseCase provideFirstUseCase();
+    FirstInteractor provideFirstInteractor();
+
     void inject(App app);
 
     void inject(PushServiceListener pushServiceListener);
     void inject(PushIntentService pushIntentService);
     FirstRepository provideFirstRepository();
+    AnotherInteractor provideAnotherInteractor();
+    AnotherUseCase provideAnotherUseCase();
     // android-hipster-needle-component-injection-method
 
     final class Initializer {

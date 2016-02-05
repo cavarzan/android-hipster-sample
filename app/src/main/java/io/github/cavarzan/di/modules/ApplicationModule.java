@@ -22,6 +22,10 @@ import io.github.cavarzan.domain.interactors.first.FirstInteractorImpl;
 import io.github.cavarzan.domain.usecases.first.FirstUseCase;
 import io.github.cavarzan.domain.usecases.first.FirstUseCaseImpl;
 import io.github.cavarzan.domain.repository.first.*;
+import io.github.cavarzan.domain.interactors.another.AnotherInteractor;
+import io.github.cavarzan.domain.interactors.another.AnotherInteractorImpl;
+import io.github.cavarzan.domain.usecases.another.AnotherUseCase;
+import io.github.cavarzan.domain.usecases.another.AnotherUseCaseImpl;
 // android-hipster-needle-module-provides-import
 
 @Module
@@ -59,8 +63,6 @@ public class ApplicationModule {
         return new Storage(preferences, gson);
     }
 
-    
-
     @Provides
     @Singleton
     EventBus provideBus() {
@@ -82,6 +84,17 @@ public class ApplicationModule {
     @Singleton
     FirstRepository provideFirstRepository(Retrofit retrofit) {
        return new FirstRepositoryImpl(new FirstRemoteRepository(retrofit), new FirstLocalRepository());
+    }
+
+    @Provides
+    @Singleton
+    AnotherInteractor provideAnotherInteractor(ThreadExecutor executor) {
+       return new AnotherInteractorImpl(executor);
+    }
+    @Provides
+    @Singleton
+    AnotherUseCase provideAnotherUseCase(ThreadExecutor executor) {
+       return new AnotherUseCaseImpl(executor);
     }
     // android-hipster-needle-module-provides-method
 
