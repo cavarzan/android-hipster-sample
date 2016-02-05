@@ -1,0 +1,8 @@
+{
+  "generator-android-hipster": {
+    "appPackage": "io.github.cavarzan",
+    "appName": "SampleAndroidHipster",
+    "language": "java",
+    "nucleus": true
+  }
+}
